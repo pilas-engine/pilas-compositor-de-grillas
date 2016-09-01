@@ -1,0 +1,18 @@
+{{outlet}}
+
+<div class="ui cards">
+  <div class="card">
+    <div class="content">
+      {{pilas-dropFile onDrop="onDrop"}}
+    </div>
+  </div>
+</div>
+
+
+{{#if hasImage}}
+  {{#link-to  "index" class="ui button primary"}}Continuar{{/link-to}}
+{{/if}}
+
+<p>
+{{#link-to  "index" class="ui button"}}Cancelar y volver{{/link-to}}
+</p>
