@@ -1,22 +1,33 @@
 ---
-language: node_js
-node_js:
-  - "4.2"
-
+language: objective-c
 sudo: false
-
 cache:
   directories:
-    - node_modules
-
-before_install:
-  - npm config set spin false
-  - npm install -g bower
-  - npm install phantomjs-prebuilt
-
+  - node_modules
+  - bower_components
+  - $HOME/.npm
+  - $HOME/.cache # includes bowers cache
+  - cache
 install:
-  - npm install
-  - bower install
-
+- make iniciar
 script:
-  - npm test
+- node -v
+- make test
+before_install:
+- git clone https://github.com/creationix/nvm.git ~/.nvm
+- source ~/.nvm/nvm.sh
+- nvm install 4.2
+- nvm use 4.2
+- npm config set spin false
+- npm install -g bower
+- npm install -g phantomjs-prebuilt
+- npm install -g grunt-cli
+- npm install -g node-gyp
+- npm install -g ember-cli
+before_deploy:
+- brew install curl
+- cd $TRAVIS_BUILD_DIR && travis/download-homebrew
+- brew install makensis
+- VERSION=$(sh travis/obtenerVersion.sh)
+- echo "Detectando version $VERSION para compilar"
+- make binarios_electron
