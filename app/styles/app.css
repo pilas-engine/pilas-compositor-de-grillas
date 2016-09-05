@@ -1,3 +1,9 @@
 .container {
   padding: 4em;
 }
+
+
+.pilas-drop-file-container.active {
+  background-color: yellow;
+
+}

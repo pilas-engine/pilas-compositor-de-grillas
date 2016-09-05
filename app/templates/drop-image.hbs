@@ -3,14 +3,14 @@
 <div class="ui cards">
   <div class="card">
     <div class="content">
-      {{pilas-dropFile onDrop="onDrop"}}
+      {{pilas-dropFile imagePath=imagePath onDrop="onDrop"}}
     </div>
   </div>
 </div>
 
 
 {{#if hasImage}}
-  {{#link-to  "index" class="ui button primary"}}Continuar{{/link-to}}
+  {{#link-to  "editor" imagePath class="ui button primary"}}Continuar{{/link-to}}
 {{/if}}
 
 <p>
