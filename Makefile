@@ -56,6 +56,7 @@ _preparar_electron:
 
 binarios_electron: compilar _preparar_electron
 	@echo "${G}Iniciando compilación a electron a OSX...${N}"
+	rm -rf binarios
 	mkdir binarios
 	rm -rf binarios/pilas-bloques-${VERSION}.dmg
 	node_modules/.bin/electron-packager dist "${NOMBRE}" --app-version=${VERSION} --platform=darwin --arch=all --version=0.37.6 --ignore=node_modules --ignore=bower_components --out=binarios --overwrite --icon=extras/icono.icns
