@@ -11,14 +11,6 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{pilas-drop-file}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'Por favor, arrastrá y soltá una imagen sobre este cuadro para comenzar.');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#pilas-drop-file}}
-      template block text
-    {{/pilas-drop-file}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

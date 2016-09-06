@@ -8,7 +8,7 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    continuar(path) {
+    continuar() {
       let record = this.store.createRecord('image', {
         path: this.get('path'),
         cols: 1,

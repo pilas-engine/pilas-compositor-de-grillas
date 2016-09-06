@@ -23,7 +23,7 @@ export default Ember.Component.extend({
   redraw() {
     let cols = this.get('cols');
     let rows = this.get('rows');
-    let canvas = this.get('canvasElement')
+    let canvas = this.get('canvasElement');
 
     if (isNaN(cols) || isNaN(rows)) {
       console.warn("Evitando dibujar porque las filas y columnas no están bien definidas.");

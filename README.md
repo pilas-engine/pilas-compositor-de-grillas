@@ -1,5 +1,7 @@
 # Pilas Compositor De Grillas
 
+[![Build Status](https://travis-ci.org/pilas-engine/pilas-compositor-de-grillas.svg?branch=master)](https://travis-ci.org/pilas-engine/pilas-compositor-de-grillas)
+
 Esta es una aplicación super sencilla pensada para probar
 grillas de gráficos orientadas a pilas-engine.
 
