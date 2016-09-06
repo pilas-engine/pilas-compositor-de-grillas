@@ -1,0 +1,6 @@
+{
+  "name": "pilas-compositor-de-grillas",
+  "version": "1.0.0",
+  "description": "Una herramienta para corregir grillas de animación.",
+  "main": "electron.js"
+}

@@ -3,7 +3,15 @@
 }
 
 
-.pilas-drop-file-container.active {
-  background-color: yellow;
+.pilas-drop-file-container.active i {
+  color: #69beff !important;
+}
 
+
+canvas {
+  border: 1px solid gray;
+}
+
+img {
+  border: 1px solid gray;
 }

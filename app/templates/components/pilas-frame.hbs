@@ -1,0 +1,8 @@
+<img src={{path}} width=300 height=300 />
+<canvas id="canvas" width=300 height=300></canvas>
+
+{{x-range-input min=0 max=(sub cols 1) step=1 value=currentFrame}}
+
+{{!action=(action "updateSaturation")}}
+
+{{currentFrame}}

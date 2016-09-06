@@ -1,3 +1,26 @@
-{{outlet}}
-model
-|{{model}}|
+<div>
+  <p>{{model.cols}}x{{model.rows}}
+
+    {{#ember-remodal openButton='Editar' buttonClasses="ui button" forService=true disableNativeClose=true closeOnOutsideClick=false closeOnEscape=false}}
+      <h2>Editar Grilla</h2>
+
+      <p>Columnas: {{input value=model.cols}}</p>
+      <p>Filas: {{input value=model.rows}}</p>
+
+      <p><button class="ui button" {{action "save"}}>Guardar</button></p>
+
+    {{/ember-remodal}}
+  </p>
+
+</div>
+
+<div>
+  {{log model}}
+  {{pilas-frame path=model.path cols=model.cols rows=model.rows}}
+</div>
+
+
+
+<div>
+  {{#link-to "index" class="ui button"}}Volver a la pantalla inicicial{{/link-to}}
+</div>
