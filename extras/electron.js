@@ -13,10 +13,10 @@ app.on('window-all-closed', function onWindowAllClosed() {
 app.on('ready', function onReady() {
 
   mainWindow = new BrowserWindow({
-    width: 951,
-    height: 672,
-    minWidth: 500,
-    minHeight: 500,
+    width: 700,
+    height: 650,
+    minWidth: 700,
+    minHeight: 650
   });
 
   delete mainWindow.module;
