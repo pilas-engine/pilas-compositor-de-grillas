@@ -2,11 +2,9 @@
   padding: 4em;
 }
 
-
 .pilas-drop-file-container.active i {
   color: #69beff !important;
 }
-
 
 canvas {
   border: 1px solid gray;
@@ -14,4 +12,18 @@ canvas {
 
 img {
   border: 1px solid gray;
+}
+
+.invisible {
+  display: none;
+}
+
+.drop-image-content {
+  width: 300px;
+  height: 200px;
+}
+
+.padding-vertical {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

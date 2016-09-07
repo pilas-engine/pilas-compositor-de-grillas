@@ -2,17 +2,16 @@
 
 <div class="ui cards">
   <div class="card">
-    <div class="content">
+    <div class="content drop-image-content">
       {{pilas-dropFile onDrop="onDrop"}}
     </div>
   </div>
 </div>
 
+<div class="padding-vertical">
+  {{#if hasImage}}
+    <button class="ui button primary" {{action "continuar"}}>Vincular imagen y continuar</button>
+  {{/if}}
 
-{{#if hasImage}}
-  <button class="ui button primary" {{action "continuar"}}>Vincular imagen y continuar</button>
-{{/if}}
-
-<p>
-{{#link-to  "index" class="ui button"}}Cancelar y volver{{/link-to}}
-</p>
+  {{#link-to  "index" class="ui button"}}Cancelar y volver{{/link-to}}
+</div>

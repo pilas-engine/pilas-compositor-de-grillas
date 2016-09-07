@@ -37,6 +37,8 @@ deploy:
     secure: O6UMwlfEljMn1MMNix9v6cQGqITvl+CrTTZWHSX+v/i4JG18QLltHlxihVbQGR/H9vKq9LPYi6wzVHn2q0wnJciwPx72kzc80FJKSZLO4Moqx65lOOw6lY4g3afzKG0oy0gBhGxt/TzlWzj10/YyTJAjhfc2SIDw4vgoSufiq3y3Gyopm+mdPJSf8oaEeONi4VwpUALhBeFBIRHVESAp0nCJlDVNslo5D1PxLBZNzMmpESKgsh0lfzbr29LdOmsWGUDycY9r7fsqEJ4iYqYRfLqvsY8N0LhD8dP7mIubpyB81dIp3aq8e/3HVbVYkAE/MUqNB+Mkfm37a1GQibM6KZ/QRuVM8O9/dLiWdqFQMaqI60zE+1lHJ50Oq3I8CRZhE6w7OHuRbbRSYTBMxZICkX4vxSIbNHBfr7vKSRIIRJrsCp9ZKkaheHpd+bIwR+vFCSRnjAlzK6B3E6IPbt3DP6XIQ17NuLWmD08SOzFCpBmRPd4E2ulxOlEVLzYzl2knSlTPLaWW8tz6zX5Y9TxadrogdvEb5+TIjOZ2wgu7B87+pD1rV4ePBklNLLUX2Vsd6CKCtNTy7DZ0KcJ7ZAbQzBj2TOaPo2UJejg0efv9hhQFzeJExc6jcAZ2+WXaNT+t5P1O7AGWEi9ux+4BniU4Gnfccj+Pkz7WTWy9oOTZcs8=
   file:
     - "binarios/pilas-compositor-de-grillas-${VERSION}.dmg"
+    - "binarios/pilas-compositor-de-grillas-${VERSION}-ia32.zip"
+    - "binarios/pilas-compositor-de-grillas-${VERSION}-x64.zip"
   on:
     tags: true
     all_branches: true

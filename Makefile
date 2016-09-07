@@ -55,9 +55,20 @@ _preparar_electron:
 	@cp extras/package.json dist
 
 binarios_electron: compilar _preparar_electron
-	@echo "${G}Iniciando compilación a electron a OSX...${N}"
+	@echo "${G}Iniciando compilación de binarios...${N}"
 	rm -rf binarios
 	mkdir binarios
+	make _binarios_osx
+	make _binarios_linux
+
+_binarios_osx:
+	@echo "${G}Compilando para osx...${N}"
 	rm -rf binarios/pilas-bloques-${VERSION}.dmg
 	node_modules/.bin/electron-packager dist "${NOMBRE}" --app-version=${VERSION} --platform=darwin --arch=all --version=0.37.6 --ignore=node_modules --ignore=bower_components --out=binarios --overwrite --icon=extras/icono.icns
 	hdiutil create binarios/${NOMBRE}-${VERSION}.dmg -srcfolder ./binarios/${NOMBRE}-darwin-x64/${NOMBRE}.app -size 200mb
+
+_binarios_linux:
+	@echo "${G}Compilando para Linux (32 y 64 bits)...${N}"
+	node_modules/.bin/electron-packager dist "${NOMBRE}" --app-version=${VERSION} --platform=linux --arch=all --version=0.37.6 --ignore=node_modules --ignore=bower_components --out=binarios --overwrite
+	cd binarios; zip -r ${NOMBRE}-${VERSION}-ia32.zip pilas-compositor-de-grillas-linux-ia32
+	cd binarios; zip -r ${NOMBRE}-${VERSION}-x64.zip pilas-compositor-de-grillas-linux-x64
