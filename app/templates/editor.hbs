@@ -15,7 +15,13 @@
 </div>
 
 <div class="padding-vertical">
-  {{pilas-frame currentFrame=currentFrame liveReload=liveReload path=model.path cols=model.cols rows=model.rows}}
+  {{pilas-frame currentFrame=currentFrame zoom=zoom onionSkin=onionSkin liveReload=liveReload path=model.path cols=model.cols rows=model.rows}}
+</div>
+
+<div class="padding-vertical">
+  Zoom:
+  {{x-range-input min=1 max=3 step=0.1 value=zoom}}
+  {{zoom}}
 </div>
 
 <div class="padding-vertical">
@@ -25,6 +31,9 @@
   {{!xrange-input action=(action "updateSaturation")}}
 </div>
 
+<div class="padding-vertical">
+  Capa cebolla: {{input type="checkbox" checked=onionSkin}}
+</div>
 
 <div class="padding-vertical">
   {{#link-to "index" class="ui button"}}Volver a la pantalla inicicial{{/link-to}}
