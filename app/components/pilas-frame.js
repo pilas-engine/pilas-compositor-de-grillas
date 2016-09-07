@@ -53,14 +53,19 @@ export default Ember.Component.extend({
     let currentFrame = this.get('currentFrame');
     let image = this.get('imageElement');
     let ctx = canvas.getContext("2d");
-    ctx.save();
-    ctx.scale(zoom, zoom);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     let width = image.naturalWidth;
     let height = image.naturalHeight;
     let frameWidth = width / this.get('cols');
     let frameHeight = height / this.get('rows');
+
+    ctx.save();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.scale(zoom, zoom);
+    ctx.translate(-frameWidth / 2, -frameHeight / 2);
+
 
     if (currentFrame > 0 && onionSkin) {
       ctx.globalAlpha = 0.5;
