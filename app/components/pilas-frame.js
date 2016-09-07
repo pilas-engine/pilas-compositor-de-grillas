@@ -34,7 +34,7 @@ export default Ember.Component.extend({
     this.get('imageElement').src = `${path}?random=${random}`;
   },
 
-  mustRedraw: Ember.observer('cols', 'rows', 'onionSkin', 'currentFrame', 'zoom', function() {
+  mustRedraw: Ember.observer('cols', 'rows', 'border', 'onionSkin', 'currentFrame', 'zoom', function() {
     this.redraw();
   }),
 
@@ -44,6 +44,7 @@ export default Ember.Component.extend({
     let onionSkin = this.get('onionSkin');
     let canvas = this.get('canvasElement');
     let zoom = this.get('zoom');
+    let border = this.get('border');
 
     if (isNaN(cols) || isNaN(rows)) {
       console.warn("Evitando dibujar porque las filas y columnas no están bien definidas.");
@@ -73,8 +74,21 @@ export default Ember.Component.extend({
       ctx.globalAlpha = 1.0;
     }
 
+    if (border) {
+      this._draw_border(ctx, frameWidth, frameHeight);
+    }
+
     ctx.drawImage(image, currentFrame * frameWidth, 0, frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
+
     ctx.restore();
+  },
+
+  _draw_border(ctx, frameWidth, frameHeight) {
+    ctx.beginPath();
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "red";
+    ctx.rect(0, 0, frameWidth, frameHeight);
+    ctx.stroke();
   }
 
 });

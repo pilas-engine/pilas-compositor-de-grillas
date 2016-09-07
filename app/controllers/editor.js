@@ -5,5 +5,6 @@ export default Ember.Controller.extend({
   currentFrame: 0,
   onionSkin: false,
   zoom: 1,
+  border: false,
   liveReload: Ember.inject.service(),
 });
