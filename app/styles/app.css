@@ -27,3 +27,17 @@ img {
   padding-top: 5px;
   padding-bottom: 5px;
 }
+
+.section-container {
+  width: 400px;
+  margin: auto;
+}
+
+* {
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+   user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
