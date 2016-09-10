@@ -2,10 +2,10 @@
   <p>Configuración: {{model.cols}} columnas / {{model.rows}} filas
 
     {{#ember-remodal openButton='Editar' buttonClasses="ui button" forService=true disableNativeClose=true closeOnOutsideClick=false closeOnEscape=false}}
-      <h2>Editar Grilla</h2>
+      <h2>Editar grilla</h2>
 
-      <p>Columnas: {{input value=model.cols}}</p>
-      <p>Filas: {{input value=model.rows}}</p>
+      <p>Columnas: {{input value=model.cols autofocus=true action="save"}}</p>
+      <p>Filas: {{input value=model.rows action="save"}}</p>
 
       <p><button class="ui button" {{action "save"}}>Guardar</button></p>
 
