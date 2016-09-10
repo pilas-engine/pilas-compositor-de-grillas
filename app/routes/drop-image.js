@@ -16,7 +16,7 @@ export default Ember.Route.extend({
       });
 
       record.save().then(() => {
-        this.transitionTo('editor', record);
+        this.transitionTo('editor.index', record);
       });
     },
 

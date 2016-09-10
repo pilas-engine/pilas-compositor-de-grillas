@@ -1,0 +1,44 @@
+<div class="padding-vertical">
+  <p>Configuración: {{model.cols}} columnas / {{model.rows}} filas
+
+    {{#ember-remodal openButton='Editar' buttonClasses="ui button" forService=true disableNativeClose=true closeOnOutsideClick=false closeOnEscape=false}}
+      <h2>Editar Grilla</h2>
+
+      <p>Columnas: {{input value=model.cols}}</p>
+      <p>Filas: {{input value=model.rows}}</p>
+
+      <p><button class="ui button" {{action "save"}}>Guardar</button></p>
+
+    {{/ember-remodal}}
+  </p>
+
+</div>
+
+<div class="padding-vertical">
+  {{pilas-frame currentFrame=currentFrame border=border zoom=zoom onionSkin=onionSkin liveReload=liveReload path=model.path cols=model.cols rows=model.rows}}
+</div>
+
+<div class="padding-vertical">
+  Zoom:
+  {{x-range-input min=0.2 max=5 step=0.1 value=zoom}}
+  {{zoom}}
+</div>
+
+<div class="padding-vertical">
+  Cuadro actual:
+  {{x-range-input min=0 max=(sub model.cols 1) step=1 value=currentFrame}}
+  {{currentFrame}}
+  {{!xrange-input action=(action "updateSaturation")}}
+</div>
+
+<div class="padding-vertical">
+  Capa cebolla: {{input type="checkbox" checked=onionSkin}}
+</div>
+
+<div class="padding-vertical">
+  Mostrar borde: {{input type="checkbox" checked=border}}
+</div>
+
+<div class="padding-vertical">
+  {{#link-to "index" class="ui button"}}Volver a la pantalla inicicial{{/link-to}}
+</div>

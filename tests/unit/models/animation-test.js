@@ -1,7 +1,7 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('image', 'Unit | Model | image', {
-  needs: ['model:animation']
+moduleForModel('animation', 'Unit | Model | animation', {
+  needs: ['model:image']
 });
 
 test('it exists', function(assert) {

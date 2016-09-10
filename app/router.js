@@ -7,7 +7,10 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('dropImage');
-  this.route('editor', {path: 'editor/:id'});
+  this.route('editor', {path: '/editor/:id'}, function() {
+    this.route('index', {path: 'index'});
+    this.route('animations', {path: 'animations'});
+  });
 });
 
 export default Router;
