@@ -11,6 +11,9 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{pilas-drop-file}}`);
 
-  assert.equal(this.$().text().trim(), 'Por favor, arrastrá y soltá una imagen sobre este cuadro para comenzar.');
+  let lines = this.$().text().trim().split("\n");
+
+  assert.equal(lines[0].trim(), "Por favor, arrastrá y soltá una imagen sobre este cuadro para comenzar.");
+  assert.equal(lines[1].trim(), "O probá con una imagen de ejemplo.");
 
 });

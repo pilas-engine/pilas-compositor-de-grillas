@@ -30,6 +30,7 @@ export default Ember.Component.extend({
       this.set("filePath", path);
       this.sendAction("onDrop", path);
     });
+
   },
 
   willDestroyElement() {
@@ -38,6 +39,13 @@ export default Ember.Component.extend({
     $('.container').off('drop');
 
     this.get("events").disableDropEvent();
-  }
+  },
 
+  actions: {
+    simulate() {
+      this.set("onHover", false);
+      this.set("filePath", './example.png');
+      this.sendAction("onDrop", './example.png');
+    }
+  }
 });

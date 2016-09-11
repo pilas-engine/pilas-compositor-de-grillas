@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+let IN_ELECTRON = (window && window.process && window.process.type);
+
 export default Ember.Service.extend(Ember.Evented, {
 
   /*
@@ -7,12 +9,14 @@ export default Ember.Service.extend(Ember.Evented, {
    * el archivo cambia
    */
   observeFilePath(path) {
-    let fs = requireNode('fs');
+    if (IN_ELECTRON) {
+      let fs = requireNode('fs');
 
-    fs.watch(path, {encoding: 'buffer'}, (eventType, filename) => {
-      if (filename) {
-        this.trigger('change');
-      }
-    });
+      fs.watch(path, {encoding: 'buffer'}, (eventType, filename) => {
+        if (filename) {
+          this.trigger('change');
+        }
+      });
+    }
   }
 });
