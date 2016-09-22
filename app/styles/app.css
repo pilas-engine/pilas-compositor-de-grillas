@@ -41,3 +41,20 @@ img {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
 }
+
+.animation-row {
+  width: 200px;
+  clear: both;
+  height: 26px;
+  margin: 1px;
+  list-style: none;
+}
+
+.animation-row button {
+  float: right;
+}
+
+a.active {
+  color: black;
+  background-color: #eee;
+}

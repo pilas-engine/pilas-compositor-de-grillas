@@ -9,7 +9,9 @@ Router.map(function() {
   this.route('dropImage');
   this.route('editor', {path: '/editor/:id'}, function() {
     this.route('index', {path: 'index'});
-    this.route('animations', {path: 'animations'});
+    this.route('animations', {path: 'animations'}, function() {
+      this.route('show', {path: ':animation'});
+    });
   });
 });
 

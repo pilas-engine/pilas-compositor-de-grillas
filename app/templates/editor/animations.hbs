@@ -1,13 +1,20 @@
-{{outlet}}
 
 <p>Cantidad de animaciones: {{model.animations.length}}</p>
 
 {{#each model.animations as |animation|}}
-  <li>{{animation.name}} <button {{action "removeAnimation" animation}}>x</button></li>
+  <li class='animation-row'>
+
+    {{#link-to 'editor.animations.show' animation.id}}
+      {{animation.name}}
+    {{/link-to}}
+
+
+    <button {{action "removeAnimation" animation}}>x</button></li>
 {{/each}}
 
 <button class="ui button" {{action "showCreateAnimationModal"}}>Crear animación</button>
 
+{{outlet}}
 
 {{#ember-remodal
   forService=true
