@@ -4,7 +4,7 @@
 {{#each model.animations as |animation|}}
   <li class='animation-row'>
 
-    {{#link-to 'editor.animations.show' animation.id}}
+    {{#link-to 'editor.animations.show' animation}}
       {{animation.name}}
     {{/link-to}}
 
@@ -25,9 +25,9 @@
 
   <h2>Crear una animación</h2>
 
-  <p>Título: {{input value=name autofocus=true action="createAnimation"}}</p>
-  <p>Cuadros por segundo: {{input value=speed action="createAnimation"}}</p>
-  <p>Cuadros: {{input value=frames action="createAnimation"}}</p>
+  <p>Título: {{input value=name autofocus=true enter="createAnimation"}}</p>
+  <p>Cuadros por segundo: {{input value=speed enter="createAnimation"}}</p>
+  <p>Cuadros: {{input value=frames enter="createAnimation"}}</p>
 
   <p><button class="ui button" {{action "createAnimation"}}>Guardar</button></p>
 

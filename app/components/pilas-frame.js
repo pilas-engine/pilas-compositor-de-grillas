@@ -17,11 +17,13 @@ export default Ember.Component.extend({
 
     window.image = this.get("imageElement");
 
-    this.get("liveReload").observeFilePath(this.get("path"));
+    if (this.get("liveReload")) {
+      this.get("liveReload").observeFilePath(this.get("path"));
 
-    this.get("liveReload").on("change", () => {
-      this.reloadImage();
-    });
+      this.get("liveReload").on("change", () => {
+        this.reloadImage();
+      });
+    }
 
     this.get('imageElement').onload = () => {
       this.redraw();
@@ -78,7 +80,10 @@ export default Ember.Component.extend({
       this._draw_border(ctx, frameWidth, frameHeight);
     }
 
-    ctx.drawImage(image, currentFrame * frameWidth, 0, frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
+    let dx = Math.floor(currentFrame % rows);
+    let dy = Math.floor(currentFrame / rows);
+
+    ctx.drawImage(image, dx * frameWidth, dy * frameHeight, frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
 
     ctx.restore();
   },

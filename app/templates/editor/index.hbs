@@ -26,7 +26,7 @@
 
 <div class="padding-vertical">
   Cuadro actual:
-  {{x-range-input min=0 max=(sub model.cols 1) step=1 value=currentFrame}}
+  {{x-range-input min=0 max=totalFrames step=1 value=currentFrame}}
   {{currentFrame}}
   {{!xrange-input action=(action "updateSaturation")}}
 </div>
