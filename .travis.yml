@@ -13,6 +13,7 @@ script:
 - node -v
 - make test
 before_install:
+- rm -rf ~/.nvm
 - git clone https://github.com/creationix/nvm.git ~/.nvm
 - source ~/.nvm/nvm.sh
 - nvm install 4.2
