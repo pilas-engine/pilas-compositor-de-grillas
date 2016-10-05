@@ -17,11 +17,13 @@ export default Ember.Component.extend({
 
     window.image = this.get("imageElement");
 
-    this.get("liveReload").observeFilePath(this.get("path"));
+    if (this.get("liveReload")) {
+      this.get("liveReload").observeFilePath(this.get("path"));
 
-    this.get("liveReload").on("change", () => {
-      this.reloadImage();
-    });
+      this.get("liveReload").on("change", () => {
+        this.reloadImage();
+      });
+    }
 
     this.get('imageElement').onload = () => {
       this.redraw();
