@@ -12,9 +12,12 @@ export default Ember.Service.extend(Ember.Evented, {
     if (IN_ELECTRON) {
       let fs = requireNode('fs');
 
-      fs.watch(path, {encoding: 'buffer'}, (eventType, filename) => {
-        if (filename) {
+      fs.watchFile(path, {encoding: 'buffer'}, (eventType, filename) => {
+        if (fs.existsSync(filename)) {
+          console.log("Notificando cambio de archivo y recargando imagen.");
           this.trigger('change');
+        } else {
+          console.warn(`Error, el archivo observado ('${path}') cambió de nombre o se eliminó.`);
         }
       });
     }

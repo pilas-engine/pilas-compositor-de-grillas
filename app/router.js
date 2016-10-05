@@ -10,7 +10,7 @@ Router.map(function() {
   this.route('editor', {path: '/editor/:id'}, function() {
     this.route('index', {path: 'index'});
     this.route('animations', {path: 'animations'}, function() {
-      this.route('show', {path: ':animation'});
+      this.route('show', {path: ':animation_id'});
     });
   });
 });
