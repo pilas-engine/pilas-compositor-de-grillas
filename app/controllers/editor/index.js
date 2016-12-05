@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['currentFrame', 'onionSkin', 'zoom'],
+  queryParams: ['currentFrame', 'onionSkin', 'zoom', 'grid', 'border'],
   currentFrame: 0,
   onionSkin: false,
   totalFrames: Ember.computed('model.cols', 'model.rows', function() {

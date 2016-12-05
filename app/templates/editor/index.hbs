@@ -15,20 +15,25 @@
 </div>
 
 <div class="padding-vertical">
-  {{pilas-frame currentFrame=currentFrame border=border zoom=zoom onionSkin=onionSkin liveReload=liveReload path=model.path cols=model.cols rows=model.rows}}
+  {{pilas-frame currentFrame=currentFrame border=border grid=grid zoom=zoom onionSkin=onionSkin liveReload=liveReload path=model.path cols=model.cols rows=model.rows}}
 </div>
 
 <div class="padding-vertical">
   Zoom:
-  {{x-range-input min=0.2 max=5 step=0.1 value=zoom}}
-  {{zoom}}
+
+  <div class="contenedor-input">
+    {{x-range-input min=0.2 max=5 step=0.1 value=zoom}}
+    {{zoom}}
+  </div>
 </div>
 
 <div class="padding-vertical">
   Cuadro actual:
-  {{x-range-input min=0 max=totalFrames step=1 value=currentFrame}}
-  {{currentFrame}}
-  {{!xrange-input action=(action "updateSaturation")}}
+
+  <div class="contenedor-input">
+    {{x-range-input min=0 max=totalFrames step=1 value=currentFrame}}
+    {{currentFrame}}
+  </div>
 </div>
 
 <div class="padding-vertical">
@@ -37,4 +42,8 @@
 
 <div class="padding-vertical">
   Mostrar borde: {{input type="checkbox" checked=border}}
+</div>
+
+<div class="padding-vertical">
+  Mostrar grilla: {{input type="checkbox" checked=grid}}
 </div>

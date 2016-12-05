@@ -17,7 +17,8 @@ export default Ember.Service.extend(Ember.Evented, {
           console.log("Notificando cambio de archivo y recargando imagen.");
           this.trigger('change');
         } else {
-          console.warn(`Error, el archivo observado ('${path}') cambió de nombre o se eliminó.`);
+          console.warn(`Error, el archivo observado ('${path}') cambió de nombre o se eliminó. Se disparará el evento de todas formas.`);
+          this.trigger('change');
         }
       });
     }

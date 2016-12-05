@@ -36,7 +36,7 @@ export default Ember.Component.extend({
     this.get('imageElement').src = `${path}?random=${random}`;
   },
 
-  mustRedraw: Ember.observer('cols', 'rows', 'border', 'onionSkin', 'currentFrame', 'zoom', function() {
+  mustRedraw: Ember.observer('cols', 'rows', 'border', 'grid', 'onionSkin', 'currentFrame', 'zoom', function() {
     this.redraw();
   }),
 
@@ -47,6 +47,7 @@ export default Ember.Component.extend({
     let canvas = this.get('canvasElement');
     let zoom = this.get('zoom');
     let border = this.get('border');
+    let grid = this.get('grid');
 
     if (isNaN(cols) || isNaN(rows)) {
       console.warn("Evitando dibujar porque las filas y columnas no están bien definidas.");
@@ -62,6 +63,8 @@ export default Ember.Component.extend({
     let frameWidth = width / this.get('cols');
     let frameHeight = height / this.get('rows');
 
+    ctx.imageSmoothingEnabled = false;
+
     ctx.save();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -69,10 +72,26 @@ export default Ember.Component.extend({
     ctx.scale(zoom, zoom);
     ctx.translate(-frameWidth / 2, -frameHeight / 2);
 
+    let dx = Math.floor(currentFrame % cols);
+    let dy = Math.floor(currentFrame / cols);
+
 
     if (currentFrame > 0 && onionSkin) {
+      let dx_anterior = Math.floor((currentFrame - 1) % cols);
+      let dy_anterior = Math.floor((currentFrame - 1) / cols);
+
       ctx.globalAlpha = 0.5;
-      ctx.drawImage(image, (currentFrame -1) * frameWidth, 0, frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
+      ctx.drawImage(image,
+                    dx_anterior * frameWidth,     // source x
+                    dy_anterior * frameHeight,    // source y
+
+                    frameWidth,          // source width
+                    frameHeight,         // source height
+
+                    0, 0,                // dest x, y
+                    frameWidth,          // dest width
+                    frameHeight);        // dest height
+
       ctx.globalAlpha = 1.0;
     }
 
@@ -80,10 +99,21 @@ export default Ember.Component.extend({
       this._draw_border(ctx, frameWidth, frameHeight);
     }
 
-    let dx = Math.floor(currentFrame % rows);
-    let dy = Math.floor(currentFrame / rows);
+    if (grid) {
+      this._draw_grid(ctx, frameWidth, frameHeight);
+    }
 
-    ctx.drawImage(image, dx * frameWidth, dy * frameHeight, frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
+
+    ctx.drawImage(image,
+                  dx * frameWidth,     // source x
+                  dy * frameHeight,    // source y
+
+                  frameWidth,          // source width
+                  frameHeight,         // source height
+
+                  0, 0,                // dest x, y
+                  frameWidth,          // dest width
+                  frameHeight);        // dest height
 
     ctx.restore();
   },
@@ -93,6 +123,26 @@ export default Ember.Component.extend({
     ctx.lineWidth = 1.5;
     ctx.strokeStyle = "red";
     ctx.rect(0, 0, frameWidth, frameHeight);
+    ctx.stroke();
+  },
+
+  _draw_grid(ctx, frameWidth, frameHeight) {
+    const gridSize = 10;
+
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
+
+    for (let i=0; i<=frameWidth; i += gridSize) {
+      this._dibujarLinea(ctx, 0, i, frameWidth, i);
+      this._dibujarLinea(ctx, i, 0, i, frameHeight);
+    }
+
+  },
+
+  _dibujarLinea(ctx, x0, y0, x1, y1) {
+    ctx.beginPath();
+    ctx.moveTo(x0, y0);
+    ctx.lineTo(x1, y1);
     ctx.stroke();
   }
 

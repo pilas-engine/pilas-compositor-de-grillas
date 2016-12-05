@@ -17,6 +17,7 @@ comandos:
 	@echo ""
 	@echo "    ${G}iniciar${N}            Instala todas las dependencias."
 	@echo "    ${G}compilar${N}           Genera los archivos compilados."
+	@echo "    ${G}ejectuar${N}           Compilar y ejecuta la aplicación con electron."
 	@echo "    ${G}test${N}               Prueba la aplicación."
 	@echo ""
 	@echo "  ${Y}Para distribuir${N}"
@@ -72,3 +73,6 @@ _binarios_linux:
 	node_modules/.bin/electron-packager dist "${NOMBRE}" --app-version=${VERSION} --platform=linux --arch=all --version=0.37.6 --ignore=node_modules --ignore=bower_components --out=binarios --overwrite
 	cd binarios; zip -r ${NOMBRE}-${VERSION}-ia32.zip pilas-compositor-de-grillas-linux-ia32
 	cd binarios; zip -r ${NOMBRE}-${VERSION}-x64.zip pilas-compositor-de-grillas-linux-x64
+
+ejecutar:
+	ember electron

@@ -58,3 +58,12 @@ a.active {
   color: black;
   background-color: #eee;
 }
+
+.contenedor-input {
+  width: 400px;
+  display: inline-block;
+}
+
+.contenedor-input input {
+  width: 85%;
+}
