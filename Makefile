@@ -71,8 +71,8 @@ _binarios_osx:
 _binarios_linux:
 	@echo "${G}Compilando para Linux (32 y 64 bits)...${N}"
 	node_modules/.bin/electron-packager dist "${NOMBRE}" --app-version=${VERSION} --platform=linux --arch=all --version=0.37.6 --ignore=node_modules --ignore=bower_components --out=binarios --overwrite
-	cd binarios; zip -r ${NOMBRE}-${VERSION}-ia32.zip pilas-compositor-de-grillas-linux-ia32
-	cd binarios; zip -r ${NOMBRE}-${VERSION}-x64.zip pilas-compositor-de-grillas-linux-x64
+	cd binarios; zip -r ${NOMBRE}-${VERSION}-linux-ia32.zip pilas-compositor-de-grillas-linux-ia32
+	cd binarios; zip -r ${NOMBRE}-${VERSION}-linux-x64.zip pilas-compositor-de-grillas-linux-x64
 
 ejecutar:
 	ember electron
