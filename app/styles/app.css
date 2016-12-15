@@ -67,3 +67,14 @@ a.active {
 .contenedor-input input {
   width: 85%;
 }
+
+
+.fila-de-botones {
+  text-align: center;
+  width: 300px;
+  padding-bottom: 3px;
+}
+
+button[disabled] {
+  opacity: 0.5;
+}

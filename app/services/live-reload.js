@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-let IN_ELECTRON = (window && window.process && window.process.type);
+const IN_ELECTRON = (window && window.process && window.process.type);
 
 export default Ember.Service.extend(Ember.Evented, {
 

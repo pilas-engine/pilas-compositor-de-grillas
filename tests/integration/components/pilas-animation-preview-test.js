@@ -11,14 +11,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{pilas-animation-preview}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#pilas-animation-preview}}
-      template block text
-    {{/pilas-animation-preview}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.ok(this.$().text().trim());
 });

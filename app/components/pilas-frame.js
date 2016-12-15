@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const IN_ELECTRON = (window && window.process && window.process.type);
+
 export default Ember.Component.extend({
   liveReload: null,
   canvasElement: null,
@@ -10,6 +12,9 @@ export default Ember.Component.extend({
   rows: null,
   onionSkin: false,
   zoom: 1,
+  dx: 0,
+  dy: 0,
+  guardando: false,
 
   didInsertElement() {
     this.set('canvasElement', this.$().find("#canvasSlide")[0]);
@@ -26,6 +31,8 @@ export default Ember.Component.extend({
     }
 
     this.get('imageElement').onload = () => {
+      this.set('dx', 0);
+      this.set('dy', 0);
       this.redraw();
     };
   },
@@ -36,7 +43,20 @@ export default Ember.Component.extend({
     this.get('imageElement').src = `${path}?random=${random}`;
   },
 
-  mustRedraw: Ember.observer('cols', 'rows', 'border', 'grid', 'onionSkin', 'currentFrame', 'zoom', function() {
+  resetDeltaPositions: Ember.observer('currentFrame', function() {
+    this.set('dx', 0);
+    this.set('dy', 0);
+  }),
+
+  puedeGuardar: Ember.computed('dx', 'dy', 'guardando', function() {
+    if (this.get('guardando')) {
+      return false;
+    }
+
+    return this.get('dx') || this.get('dy');
+  }),
+
+  mustRedraw: Ember.observer('cols', 'rows', 'border', 'grid', 'onionSkin', 'currentFrame', 'zoom', 'dx', 'dy', function() {
     this.redraw();
   }),
 
@@ -104,6 +124,9 @@ export default Ember.Component.extend({
     }
 
 
+    let dest_x = this.get('dx');
+    let dest_y = this.get('dy');
+
     ctx.drawImage(image,
                   dx * frameWidth,     // source x
                   dy * frameHeight,    // source y
@@ -111,7 +134,7 @@ export default Ember.Component.extend({
                   frameWidth,          // source width
                   frameHeight,         // source height
 
-                  0, 0,                // dest x, y
+                  dest_x, dest_y,                // dest x, y
                   frameWidth,          // dest width
                   frameHeight);        // dest height
 
@@ -144,6 +167,111 @@ export default Ember.Component.extend({
     ctx.moveTo(x0, y0);
     ctx.lineTo(x1, y1);
     ctx.stroke();
+  },
+
+  _guardar_archivo_desde_string_base64(datos_base_64, nombre_de_archivo) {
+    return new Ember.RSVP.Promise((success, reject) => {
+      var base64Data = datos_base_64.replace(/^data:[^,]+,/, "");
+      let path = requireNode('path');
+
+      requireNode("fs").writeFile(nombre_de_archivo, base64Data, 'base64', function(err) {
+        if (err) {
+          reject(err);
+        } else {
+          success(path.resolve(nombre_de_archivo));
+        }
+      });
+
+    });
+  },
+
+  actions: {
+    moveFrameUp() {
+      this.decrementProperty('dy');
+    },
+
+    moveFrameLeft() {
+      this.decrementProperty('dx');
+    },
+
+    moveFrameDown() {
+      this.incrementProperty('dy');
+    },
+
+    moveFrameRight() {
+      this.incrementProperty('dx');
+    },
+
+    cancelarAlineacion() {
+      this.set('dx', 0);
+      this.set('dy', 0);
+    },
+
+    guardarAlineacion() {
+      let cols = this.get('cols');
+      let rows = this.get('rows');
+
+      let currentFrame = this.get('currentFrame');
+
+      let canvas = document.createElement('canvas');
+
+      let image = this.get('imageElement');
+      let ctx = canvas.getContext("2d");
+      ctx.imageSmoothingEnabled = false;
+
+      let width = image.naturalWidth;
+      let height = image.naturalHeight;
+
+      let frameWidth = width / this.get('cols');
+      let frameHeight = height / this.get('rows');
+
+
+      canvas.width = width;
+      canvas.height = height;
+
+      for (let i=0; i<cols; i++) {
+        for (let j=0; j<rows; j++) {
+
+          let cuadroActual = (j*cols + i);
+          let dest_x = i * frameWidth;
+          let dest_y = j * frameHeight;
+          let dx = 0;
+          let dy = 0;
+
+          if (cuadroActual === currentFrame) {
+            dx = this.get('dx');
+            dy = this.get('dy');
+          }
+
+          ctx.drawImage(image,
+                  i * frameWidth,     // source x
+                  j * frameHeight,    // source y
+
+                  frameWidth,          // source width
+                  frameHeight,         // source height
+
+                  dest_x + dx,                        // dest x
+                  dest_y + dy,                        // dest y
+                  frameWidth,          // dest width
+                  frameHeight);        // dest height
+        }
+      }
+
+      if (IN_ELECTRON) {
+        this.set("guardando", true);
+
+        this._guardar_archivo_desde_string_base64(canvas.toDataURL(), this.get("path")).
+          then(() => {
+            setTimeout(() => {
+              this.set('guardando', false);
+            }, 3000);
+          });
+      } else {
+        alert("Esta funcionalidad solo está disponible en la versión para descargar.");
+      }
+
+    }
+
   }
 
 });
